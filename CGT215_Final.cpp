@@ -242,8 +242,20 @@ int main() {
         if (choice == Sunset) {
             animationWindow.clear(nightColor);
             
-            // Create a moon shape
-            
+            // CREATE MOON SHAPE
+            // Create the white moon circle shape
+            CircleShape moon;
+
+            // Set the radius of the circle
+            moon.setRadius(100.f);
+
+            // Set the position of the circle
+            moon.setPosition(75.f, 75.f);
+
+            // Set the fill color of the circle
+            moon.setFillColor(Color::White);
+
+            animationWindow.draw(moon);
         }
         else {
             animationWindow.clear(dayColor);
