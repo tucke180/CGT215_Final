@@ -1,7 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cmath>
+
 using namespace std;
 using namespace sf;
+
 
 int main() {
  
@@ -238,6 +241,9 @@ int main() {
         // Update the background color based on user input
         if (choice == Sunset) {
             animationWindow.clear(nightColor);
+            
+            // Create a moon shape
+            
         }
         else {
             animationWindow.clear(dayColor);
@@ -250,4 +256,3 @@ int main() {
 
     return 0;
 }
-//I JUST NEED TO PUSH THIS
