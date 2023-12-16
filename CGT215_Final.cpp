@@ -176,13 +176,29 @@ int main() {
 
     // Create button labels
    Text label1("Sunrise", font, 20);
-    Text label2("Sunset", font, 20);
+   Text label2("Sunset", font, 20);
 
     // Set label positions
     label1.setPosition(30, 90);
     label2.setPosition(270, 90);
 
+    // Set choice options
+    enum ChoiceEnum {
+        Sunrise,
+        Sunset
+    };
+    ChoiceEnum choice = Sunrise;
+
     while (window.isOpen()) {
+
+        // Draw buttons and labels
+        window.draw(button1);
+        window.draw(button2);
+        window.draw(label1);
+        window.draw(label2);
+
+        window.display();
+
         Event event;
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed) {
@@ -193,23 +209,17 @@ int main() {
                 Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
 
                 if (button1.getGlobalBounds().contains(mousePos)) {
-                    std::cout << "Button 1 clicked!" << std::endl;
+                    cout << "Sunrise!" << endl;
+                    choice = Sunrise;
                 }
-                else if (button2.getGlobalBounds().contains(mousePos)) {
-                    std::cout << "Button 2 clicked!" << std::endl;
+                if (button2.getGlobalBounds().contains(mousePos)) {
+                    cout << "Sunset!" << endl;
+                    choice = Sunset;
                 }
             }
         }
 
         window.clear();
-
-        // Draw buttons and labels
-        window.draw(button1);
-        window.draw(button2);
-        window.draw(label1);
-        window.draw(label2);
-
-        window.display();
     }
 
     //ANIMATION
@@ -226,8 +236,12 @@ int main() {
         }
 
         // Update the background color based on user input
-        Color backgroundColor(dayRed, dayGreen, dayBlue);
-        animationWindow.clear(backgroundColor);
+        if (choice == Sunset) {
+            animationWindow.clear(nightColor);
+        }
+        else {
+            animationWindow.clear(dayColor);
+        };
 
         // Draw your animation or graphics here
 
