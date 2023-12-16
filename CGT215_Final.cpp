@@ -12,7 +12,6 @@ int main() {
     Uint8 dayRed = 255;
     Uint8 dayGreen = 255;
     Uint8 dayBlue = 255;
-    Color dayColor(dayRed, dayGreen, dayBlue);
 
     // Text to instruct the user
     Font font;
@@ -169,10 +168,10 @@ int main() {
     button2.setPosition(240, 75);
 
     // Set button colors
-    Color dayColor(dayRed, dayGreen, nightBlue);
+    Color dayColor(dayRed, dayGreen, dayBlue);
     Color nightColor(nightRed, nightGreen, nightBlue);
 
-    button1.setFillColor(Color::Blue);
+    button1.setFillColor(dayColor);
     button2.setFillColor(nightColor);
 
     // Create button labels
