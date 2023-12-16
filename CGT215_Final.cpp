@@ -8,10 +8,11 @@ int main() {
     // COLLECT DAY SKY COLOR
     RenderWindow daySkyInput(VideoMode(400, 200), "pick a daytime sky color");
 
-    // RGB values for the background color
+    // RGB values for the day sky color
     Uint8 dayRed = 255;
     Uint8 dayGreen = 255;
     Uint8 dayBlue = 255;
+    Color dayColor(dayRed, dayGreen, dayBlue);
 
     // Text to instruct the user
     Font font;
@@ -36,6 +37,7 @@ int main() {
     dayBlueSlider.setFillColor(Color::Blue);
     dayBlueSlider.setPosition(10, 160);
 
+    // Actual collection of data loop
     while (daySkyInput.isOpen()) {
         Event event;
         while (daySkyInput.pollEvent(event)) {
@@ -90,7 +92,6 @@ int main() {
     Uint8 nightBlue = 255;
 
     //Text to instruct the user
-
     Text nightInstructionText("Pick Nighttime Sky Color:", font, 20);
     nightInstructionText.setPosition(10, 10);
 
@@ -110,6 +111,7 @@ int main() {
     nightBlueSlider.setFillColor(Color::Blue);
     nightBlueSlider.setPosition(10, 160);
 
+    // Actual data collection loop
     while (nightSkyInput.isOpen()) {
         Event event;
         while (nightSkyInput.pollEvent(event)) {
@@ -133,13 +135,12 @@ int main() {
                     nightBlue = static_cast<Uint8>(mousePos.x - nightBlueSlider.getPosition().x);
                 }
 
-                // Display the selected color
+                // Display the selected color AND SET "nightColor"
                 nightcolorText.setString("Selected Color: " + to_string(nightRed) + ", " + to_string(nightGreen) + ", " + to_string(nightBlue));
-                Color textColor(nightRed, nightGreen, nightBlue);
-                nightcolorText.setFillColor(textColor);
+                Color nightColor(nightRed, nightGreen, nightBlue);
+                nightcolorText.setFillColor(nightColor);
             }
         }
-
         nightSkyInput.clear();
 
         // Draw sliders and text
@@ -155,6 +156,62 @@ int main() {
     // Close the input window after user provides input
     nightSkyInput.close();
 
+
+    // WINDOW TO PICK BETWEEN SUNRISE AND SUNSET
+    RenderWindow window(VideoMode(400, 200), "Sunrise or Sunset");
+
+    // Create button shapes
+    RectangleShape button1(Vector2f(150, 50));
+    RectangleShape button2(Vector2f(150, 50));
+
+    // Set button positions
+    button1.setPosition(10, 75);
+    button2.setPosition(240, 75);
+
+    // Set button colors
+    Color dayColor(dayRed, dayGreen, nightBlue);
+    Color nightColor(nightRed, nightGreen, nightBlue);
+
+    button1.setFillColor(Color::Blue);
+    button2.setFillColor(nightColor);
+
+    // Create button labels
+   Text label1("Sunrise", font, 20);
+    Text label2("Sunset", font, 20);
+
+    // Set label positions
+    label1.setPosition(30, 90);
+    label2.setPosition(270, 90);
+
+    while (window.isOpen()) {
+        Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == Event::Closed) {
+                window.close();
+            }
+            else if (event.type == Event::MouseButtonPressed) {
+                // Check if the mouse is over a button when clicked
+                Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
+
+                if (button1.getGlobalBounds().contains(mousePos)) {
+                    std::cout << "Button 1 clicked!" << std::endl;
+                }
+                else if (button2.getGlobalBounds().contains(mousePos)) {
+                    std::cout << "Button 2 clicked!" << std::endl;
+                }
+            }
+        }
+
+        window.clear();
+
+        // Draw buttons and labels
+        window.draw(button1);
+        window.draw(button2);
+        window.draw(label1);
+        window.draw(label2);
+
+        window.display();
+    }
 
     //ANIMATION
     // Create a window for the animation
