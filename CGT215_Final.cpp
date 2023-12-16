@@ -240,8 +240,25 @@ int main() {
 
         // Update the background color based on user input
         if (choice == Sunset) {
+            // CREATE SUN SHAPE
+            // Create the yella sun circle shape
+            CircleShape sun;
+
+            // Set the radius of the circle
+            sun.setRadius(100.f);
+
+            // Set the position of the circle
+            sun.setPosition(75.f, 75.f);
+
+            // Set the fill color of the circle
+            sun.setFillColor(Color::Yellow);
+
+            animationWindow.draw(sun);
+
             animationWindow.clear(nightColor);
-            
+        }
+        else {
+            animationWindow.clear(dayColor);
             // CREATE MOON SHAPE
             // Create the white moon circle shape
             CircleShape moon;
@@ -256,9 +273,6 @@ int main() {
             moon.setFillColor(Color::White);
 
             animationWindow.draw(moon);
-        }
-        else {
-            animationWindow.clear(dayColor);
         };
 
         // Draw your animation or graphics here
