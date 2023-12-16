@@ -90,8 +90,6 @@ int main() {
     Uint8 nightBlue = 255;
 
     //Text to instruct the user
-    Font font;
-    font.loadFromFile("Valoon.ttf");
 
     Text nightInstructionText("Pick Nighttime Sky Color:", font, 20);
     nightInstructionText.setPosition(10, 10);
